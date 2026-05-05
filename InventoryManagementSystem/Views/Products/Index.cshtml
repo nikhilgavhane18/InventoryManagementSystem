@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Inventory.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h2 class="mb-3">Product List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add Product</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>PId</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th style="width:150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Category</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PId" class="btn btn-warning btn-sm">Edit</a>
+
+                        <a asp-action="Delete" asp-route-id="@item.PId"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this product?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No Products Available</td>
+            </tr>
+        }
+    </tbody>
+</table>

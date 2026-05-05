@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Inventory.DataAccess/Inventory.DataAccess.csproj" />
+  <Project Path="Inventory.Models/Inventory.Models.csproj" />
+  <Project Path="Inventory.Services/Inventory.Services.csproj" Id="826ea63a-8d2b-4268-aa4a-43fcbb728e47" />
+  <Project Path="InventoryManagementSystem/InventoryManagementSystem.csproj" />
+</Solution>

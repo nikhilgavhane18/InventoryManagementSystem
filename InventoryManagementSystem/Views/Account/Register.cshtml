@@ -1,0 +1,63 @@
+﻿    @using Inventory.Models.ViewModels
+    @model RegisterViewModel
+
+    <style>
+        .register-box {
+            width: 300px;
+            margin: 60px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+            .register-box h3 {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .register-box input {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .register-box button {
+                width: 100%;
+                padding: 8px;
+                background-color: #333;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .register-box button:hover {
+                    background-color: #555;
+                }
+    </style>
+
+    <div class="register-box">
+        <h3>Register</h3>
+
+    <form asp-action="Register" method="post">
+
+        <div asp-validation-summary="All" style="color:red;"></div>
+
+        <input asp-for="FullName" placeholder="Full Name" />
+        <span asp-validation-for="FullName" style="color:red;"></span>
+
+        <input asp-for="Email" placeholder="Email" />
+        <span asp-validation-for="Email" style="color:red;"></span>
+
+        <input asp-for="Password" type="password" placeholder="Password" />
+        <span asp-validation-for="Password" style="color:red;"></span>
+
+        <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" />
+        <span asp-validation-for="ConfirmPassword" style="color:red;"></span>
+
+        <button type="submit">Register</button>
+    </form>
+    </div>

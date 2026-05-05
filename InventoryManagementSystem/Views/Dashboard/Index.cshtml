@@ -1,0 +1,68 @@
+﻿@using Inventory.Models.ViewModels
+
+<div class="container mt-4">
+    <h2>Admin Dashboard</h2>
+
+    <div class="row">
+
+        <!-- Products -->
+        <div class="col-md-3">
+            <a asp-controller="Products" asp-action="Index" class="text-decoration-none">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5>Products</h5>
+                        @* <h2>@Model.TotalProducts</h2> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a asp-controller="Category" asp-action="Index" class="text-decoration-none">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-body">
+                        <h5>Categories</h5>
+                        @* <h2>@Model.TotalCategories</h2> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Stock -->
+        <div class="col-md-3">
+            <a asp-controller="Stock" asp-action="Index" class="text-decoration-none">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5>Stock</h5>
+                        @* <h2>@Model.TotalStock</h2> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Suppliers -->
+        <div class="col-md-3">
+            <a asp-controller="Suppliers" asp-action="Index" class="text-decoration-none">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5>Suppliers</h5>
+                        @* <h2>@Model.TotalSuppliers</h2> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Orders -->
+        <div class="col-md-3">
+            <a asp-controller="Order" asp-action="Index" class="text-decoration-none">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5>Orders</h5>
+                        @* <h2>@Model.TotalOrders</h2> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
