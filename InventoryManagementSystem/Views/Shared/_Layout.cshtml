@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Inventory.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,7 +47,9 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
-                                    <span class="nav-link text-dark">Hello @User.Identity.Name</span>
+                                    <span class="nav-link text-dark">
+                                        Hello, @currentUser.FullName
+                                    </span>
                                 </li>
 
                                 <li class="nav-item">

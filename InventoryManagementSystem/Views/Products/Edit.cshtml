@@ -7,7 +7,7 @@
 <h2 class="mb-4">Edit Product</h2>
 
 <div class="card p-4 shadow-sm">
-    <form asp-action="Edit">
+    <form asp-action="Edit" enctype="multipart/form-data">
 
         <input type="hidden" asp-for="PId" />
 
@@ -18,8 +18,12 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Category" class="form-label"></label>
-            <input asp-for="Category" class="form-control" />
+            <label asp-for="CId" class="form-label"></label>
+            <select asp-for="CId" class="form-select"
+             asp-items="ViewBag.CategoryList">
+            <option value="">-- Select Category --</option>
+            </select>
+            <span asp-validation-for="CId" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -27,7 +31,27 @@
             <input asp-for="Price" class="form-control" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
 
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Change Product Image </label>
+            <input type="file" name="ImageFile" class="form-control" />
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div class="mb-3">
+
+                <img src="@Model.ImagePath"
+                     width="200"
+                     class="rounded shadow" />
+
+            </div>
+        }
         <button type="submit" class="btn btn-primary">Update</button>
         <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 

@@ -7,7 +7,7 @@
 <h2 class="mb-4">Add Product</h2>
 
 <div class="card p-4 shadow-sm">
-    <form asp-action="Create">
+    <form asp-action="Create" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label asp-for="ProductName" class="form-label"></label>
@@ -16,14 +16,34 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Category" class="form-label"></label>
-            <input asp-for="Category" class="form-control" placeholder="Enter category" />
+            <label class="form-label">Category</label>
+
+            <select asp-for="CId"
+                    asp-items="@(new SelectList(ViewBag.Categories, "CId", "CategoryName"))"
+                    class="form-control">
+                <option value="">-- Select Category --</option>
+            </select>
+
+            <span asp-validation-for="CId" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="Price" class="form-label"></label>
             <input asp-for="Price" class="form-control" placeholder="Enter price" />
             <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter product description">
+                 </textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">Upload Product Image </label>
+            <input type="file" name="ImageFile" class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>

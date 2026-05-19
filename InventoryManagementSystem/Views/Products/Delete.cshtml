@@ -21,9 +21,12 @@
 
         <dt class="col-sm-3">Price</dt>
         <dd class="col-sm-9">@Model.Price</dd>
+
+        <dt class="col-sm-3">ImagePath</dt>
+        <dd class="col-sm-9">@Model.ImagePath</dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="DeleteConfirmed" method="post">
         <input type="hidden" asp-for="PId" />
 
         <button type="submit" class="btn btn-danger">Delete</button>
