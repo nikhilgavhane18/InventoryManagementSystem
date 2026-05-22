@@ -4,60 +4,178 @@
     ViewData["Title"] = "Product List";
 }
 
-<h2 class="mb-3">Product List</h2>
+<h2 class="mb-4">Product List</h2>
 
-<a asp-action="Create" class="btn btn-primary mb-3">Add Product</a>
+<a asp-action="Create"
+   class="btn btn-success mb-3">
+
+    Add Product
+
+</a>
 
 <table class="table table-bordered table-striped">
+
     <thead class="table-dark">
+
         <tr>
+
             <th>PId</th>
+
+            <th>Image</th>
+
             <th>Product Name</th>
+
             <th>Category</th>
+
             <th>Price</th>
-            <th>View</th>
-            <th style="width:150px;">Actions</th>
+
+            <th>Stock Quantity</th>
+
+            <th>Status</th>
+
+            <!-- DETAILS COLUMN -->
+
+            <th>Details</th>
+
+            <!-- ACTION COLUMN -->
+
+            <th style="width:180px;">
+                Actions
+            </th>
+
         </tr>
+
     </thead>
+
     <tbody>
+
         @if (Model != null && Model.Any())
         {
             foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.PId</td>
-                    <td>@item.ProductName</td>
-                    <td>@item.Category.CategoryName</td>
-                    <td>@item.Price</td>
+
+                    <!-- PRODUCT IMAGE -->
+                    <!-- PRODUCT ID -->
+
                     <td>
+                        @item.PId
+                    </td>
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <td>
+
+                        <img src="@item.ImagePath"
+                             width="100"
+                             height="100"
+                             style="object-fit:cover;"
+                             class="rounded shadow-sm" />
+
+                    </td>
+
+                    <!-- PRODUCT NAME -->
+
+                    <td>
+                        @item.ProductName
+                    </td>
+
+                    <!-- CATEGORY -->
+
+                    <td>
+                        @item.Category.CategoryName
+                    </td>
+
+                    <!-- PRICE -->
+
+                    <td>
+                        ₹@item.Price
+                    </td>
+
+                    <!-- STOCK QUANTITY -->
+
+                    <td>
+                        @item.StockQuantity
+                    </td>
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        @if (item.Status == "Out Of Stock")
+                        {
+                            <span class="badge bg-danger">
+                                @item.Status
+                            </span>
+                        }
+                        else if (item.Status == "Low Stock")
+                        {
+                            <span class="badge bg-warning text-dark">
+                                @item.Status
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">
+                                @item.Status
+                            </span>
+                        }
+
+                    </td>
+
+                    <!-- DETAILS BUTTON -->
+
+                    <td>
+
                         <a asp-action="Details"
                            asp-route-id="@item.PId"
                            class="btn btn-info btn-sm">
-                            View
+
+                            View Details
+
                         </a>
+
                     </td>
 
+                    <!-- ACTION BUTTONS -->
+
                     <td>
+
                         <a asp-action="Edit"
                            asp-route-id="@item.PId"
-                           class="btn btn-warning btn-sm">
+                           class="btn btn-primary btn-sm">
+
                             Edit
+
                         </a>
 
                         <a asp-action="Delete"
                            asp-route-id="@item.PId"
-                           class="btn btn-danger btn-sm">
+                           class="btn btn-danger btn-sm ms-1">
+
                             Delete
+
                         </a>
+
                     </td>
+
                 </tr>
             }
         }
         else
         {
             <tr>
-                <td colspan="6" class="text-center">No Products Available</td>
+
+                <td colspan="9"
+                    class="text-center text-danger">
+
+                    No Products Available
+
+                </td>
+
             </tr>
         }
+
     </tbody>
+
 </table>

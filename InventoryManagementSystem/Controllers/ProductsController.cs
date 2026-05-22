@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace InventoryManagementSystem.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Supplier")]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -41,15 +41,12 @@ namespace InventoryManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                // IMAGE UPLOAD
                 if (ImageFile != null)
                 {
-                    string folder =
-                        Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string folder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
 
                     string fileName = Guid.NewGuid().ToString()
-                                      + "_"
-                                      + ImageFile.FileName;
+                                      + "_" + ImageFile.FileName;
 
                     string filePath = Path.Combine(folder, fileName);
 
@@ -58,9 +55,10 @@ namespace InventoryManagementSystem.Controllers
                         ImageFile.CopyTo(stream);
                     }
 
-                    // SAVE PATH IN DATABASE
                     product.ImagePath = "/images/" + fileName;
                 }
+
+                UpdateStockStatus(product);
 
                 _productService.CreateProduct(product);
 
@@ -74,7 +72,7 @@ namespace InventoryManagementSystem.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-       
+
             var product = _productService.GetProductById(id);
 
             if (product == null)
@@ -95,25 +93,22 @@ namespace InventoryManagementSystem.Controllers
             {
                 if (ImageFile != null)
                 {
-                    string folder =
-                        Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string folder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
 
-                    string fileName =
-                        Guid.NewGuid().ToString()
-                        + "_"
-                        + ImageFile.FileName;
+                    string fileName = Guid.NewGuid().ToString()
+                                      + "_" + ImageFile.FileName;
 
-                    string filePath =
-                        Path.Combine(folder, fileName);
+                    string filePath = Path.Combine(folder, fileName);
 
-                    using (var stream =
-                           new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         ImageFile.CopyTo(stream);
                     }
 
                     product.ImagePath = "/images/" + fileName;
                 }
+
+                UpdateStockStatus(product);
 
                 _productService.UpdateProduct(product);
 
@@ -151,6 +146,28 @@ namespace InventoryManagementSystem.Controllers
                 return NotFound();
 
             return View(product);
+        }
+        [HttpGet]
+        public IActionResult ManageStock()
+        {
+            var products = _productService.GetAllProducts();
+            return View(products);
+        }
+
+        private void UpdateStockStatus(Product product)
+        {
+            if (product.StockQuantity == 0)
+            {
+                product.Status = "Out Of Stock";
+            }
+            else if (product.StockQuantity <= 5)
+            {
+                product.Status = "Low Stock";
+            }
+            else
+            {
+                product.Status = "Available In Stock";
+            }
         }
     }
 }

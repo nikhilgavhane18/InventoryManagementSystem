@@ -1,0 +1,155 @@
+﻿<style>
+
+    body {
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+        min-height: 100vh;
+    }
+
+    .dashboard-container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .dashboard-title {
+        color: white;
+        font-weight: bold;
+    }
+
+    .dashboard-subtitle {
+        color: #dcdcdc;
+    }
+
+    .card {
+        transition: 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+</style>
+
+@{
+    ViewData["Title"] = "Supplier Dashboard";
+}
+
+<div class="container dashboard-container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+
+        <h1 class="dashboard-title">
+            Supplier Dashboard
+        </h1>
+
+        <p class="dashboard-subtitle">
+            Manage Products, Stock and Orders
+        </p>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Manage Products -->
+        <div class="col-md-4">
+
+            <div class="card shadow-lg border-0 rounded-4 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="mb-3">
+                        <i class="bi bi-box-seam text-primary"
+                           style="font-size:60px;"></i>
+                    </div>
+
+                    <h3 class="fw-bold">
+                        Manage Products
+                    </h3>
+
+                    <p class="text-muted mt-3">
+                        Add, Edit and Delete Products
+                    </p>
+
+                    <a asp-controller="Products"
+                       asp-action="Index"
+                       class="btn btn-primary mt-3 px-4">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Manage Stock -->
+        <div class="col-md-4">
+
+            <div class="card shadow-lg border-0 rounded-4 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="mb-3">
+                        <i class="bi bi-bar-chart-fill text-warning"
+                           style="font-size:60px;"></i>
+                    </div>
+
+                    <h3 class="fw-bold">
+                        Manage Stock
+                    </h3>
+
+                    <p class="text-muted mt-3">
+                        Update Product Quantity & Stock Status
+                    </p>
+
+                    <a asp-controller="Products"
+                       asp-action="ManageStock"
+                       class="btn btn-warning mt-3 px-4 text-white">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- View Orders -->
+        <div class="col-md-4">
+
+            <div class="card shadow-lg border-0 rounded-4 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="mb-3">
+                        <i class="bi bi-cart-check-fill text-success"
+                           style="font-size:60px;"></i>
+                    </div>
+
+                    <h3 class="fw-bold">
+                        View Orders
+                    </h3>
+
+                    <p class="text-muted mt-3">
+                        Check User Orders & Delivery Status
+                    </p>
+
+                    <a asp-controller="SupplierOrders"
+                       asp-action="Index"
+                       class="btn btn-success mt-3 px-4">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
