@@ -29,15 +29,7 @@
 
             <th>Price</th>
 
-            <th>Stock Quantity</th>
-
-            <th>Status</th>
-
-            <!-- DETAILS COLUMN -->
-
             <th>Details</th>
-
-            <!-- ACTION COLUMN -->
 
             <th style="width:180px;">
                 Actions
@@ -55,7 +47,6 @@
             {
                 <tr>
 
-                    <!-- PRODUCT IMAGE -->
                     <!-- PRODUCT ID -->
 
                     <td>
@@ -83,7 +74,9 @@
                     <!-- CATEGORY -->
 
                     <td>
-                        @item.Category.CategoryName
+                        @(item.Category != null
+                                        ? item.Category.CategoryName
+                                        : "No Category")
                     </td>
 
                     <!-- PRICE -->
@@ -92,39 +85,7 @@
                         ₹@item.Price
                     </td>
 
-                    <!-- STOCK QUANTITY -->
-
-                    <td>
-                        @item.StockQuantity
-                    </td>
-
-                    <!-- STATUS -->
-
-                    <td>
-
-                        @if (item.Status == "Out Of Stock")
-                        {
-                            <span class="badge bg-danger">
-                                @item.Status
-                            </span>
-                        }
-                        else if (item.Status == "Low Stock")
-                        {
-                            <span class="badge bg-warning text-dark">
-                                @item.Status
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-success">
-                                @item.Status
-                            </span>
-                        }
-
-                    </td>
-
-                    <!-- DETAILS BUTTON -->
-
+                   
                     <td>
 
                         <a asp-action="Details"

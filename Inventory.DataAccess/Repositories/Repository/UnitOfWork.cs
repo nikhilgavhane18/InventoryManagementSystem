@@ -12,6 +12,8 @@ namespace Inventory.UnitOfWork
 
         public ICategoryRepository Categories { get; private set; }
 
+        public IStockRepository Stocks { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -19,6 +21,8 @@ namespace Inventory.UnitOfWork
             Products = new ProductRepository(_context);
 
             Categories = new CategoryRepository(_context);
+
+            Stocks = new StockRepository(_context);
         }
 
         public void Save()

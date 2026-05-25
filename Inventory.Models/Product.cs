@@ -37,11 +37,6 @@ namespace Inventory.Models
         public string Description { get; set; }
 
         public string? ImagePath { get; set; }
-
-        // STOCK QUANTITY
-        public int StockQuantity { get; set; }
-
-        // PRODUCT STATUS
-        public string? Status { get; set; }
+        public Stock? Stock { get; set; }
     }
 }

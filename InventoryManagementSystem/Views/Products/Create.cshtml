@@ -7,52 +7,140 @@
 <h2 class="mb-4">Add Product</h2>
 
 <div class="card p-4 shadow-sm">
+
     <form asp-action="Create" enctype="multipart/form-data">
 
-        <div class="mb-3">
-            <label asp-for="ProductName" class="form-label"></label>
-            <input asp-for="ProductName" class="form-control" placeholder="Enter product name" />
-            <span asp-validation-for="ProductName" class="text-danger"></span>
-        </div>
+        <!-- PRODUCT NAME -->
 
         <div class="mb-3">
-            <label class="form-label">Category</label>
+
+            <label asp-for="ProductName"
+                   class="form-label">
+            </label>
+
+            <input asp-for="ProductName"
+                   class="form-control"
+                   placeholder="Enter product name" />
+
+            <span asp-validation-for="ProductName"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <!-- CATEGORY -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Category
+            </label>
 
             <select asp-for="CId"
                     asp-items="@(new SelectList(ViewBag.Categories, "CId", "CategoryName"))"
                     class="form-control">
-                <option value="">-- Select Category --</option>
+
+                <option value="">
+                    -- Select Category --
+                </option>
+
             </select>
 
-            <span asp-validation-for="CId" class="text-danger"></span>
+            <span asp-validation-for="CId"
+                  class="text-danger">
+            </span>
+
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Price" class="form-label"></label>
-            <input asp-for="Price" class="form-control" placeholder="Enter price" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="StockQuantity" class="form-label">Stock Quantity</label>
-            <input asp-for="StockQuantity" class="form-control" placeholder="Enter stock quantity" />
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter product description">
-                 </textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+        <!-- PRICE -->
 
         <div class="mb-3">
 
-            <label class="form-label">Upload Product Image </label>
-            <input type="file" name="ImageFile" class="form-control" />
+            <label asp-for="Price"
+                   class="form-label">
+            </label>
+
+            <input asp-for="Price"
+                   class="form-control"
+                   placeholder="Enter price" />
+
+            <span asp-validation-for="Price"
+                  class="text-danger">
+            </span>
+
         </div>
 
-        <button type="submit" class="btn btn-success">Save</button>
-        <a asp-action="Index" class="btn btn-secondary">Back</a>
+        <!-- STOCK QUANTITY -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Stock Quantity
+            </label>
+
+            <input type="number"
+                   name="StockQuantity"
+                   class="form-control"
+                   placeholder="Enter stock quantity" />
+
+        </div>
+
+        <!-- DESCRIPTION -->
+
+        <div class="mb-3">
+
+            <label asp-for="Description"
+                   class="form-label">
+            </label>
+
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="4"
+                      placeholder="Enter product description">
+            </textarea>
+
+            <span asp-validation-for="Description"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <!-- IMAGE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Upload Product Image
+            </label>
+
+            <input type="file"
+                   name="ImageFile"
+                   class="form-control" />
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Save
+
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
 
     </form>
+
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

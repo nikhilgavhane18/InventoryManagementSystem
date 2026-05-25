@@ -6,7 +6,11 @@ namespace Inventory.UnitOfWork
     public interface IUnitOfWork
     {
         IProductRepository Products { get; }
+
         ICategoryRepository Categories { get; }
+
+        IStockRepository Stocks { get; }
+
         void Save();
     }
 }

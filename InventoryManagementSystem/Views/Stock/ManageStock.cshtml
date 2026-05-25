@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Inventory.Models.Product>
+
+<h2>Manage Stock</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.ProductName</td>
+
+                <td>
+                    @(item.Stock != null ? item.Stock.StockQuantity : 0)
+                </td>
+
+                <td>
+                    @if (item.Stock != null)
+                    {
+                        @if (item.Stock.StockQuantity == 0)
+                        {
+                            <span class="text-danger">
+                                Out Of Stock
+                            </span>
+                        }
+                        else if (item.Stock.StockQuantity <= 5)
+                        {
+                            <span class="text-warning">
+                                Low Stock
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-success">
+                                Available In Stock
+                            </span>
+                        }
+                    }
+                </td>
+
+                <td>
+
+                    <a asp-controller="Stock"
+                       asp-action="Edit"
+                       asp-route-id="@item.Stock.StockId"
+                       class="btn btn-primary">
+
+                        Update Stock
+
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

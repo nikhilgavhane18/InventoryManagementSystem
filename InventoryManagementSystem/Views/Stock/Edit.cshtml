@@ -1,0 +1,41 @@
+﻿@model Inventory.Models.Stock
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Edit Stock</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="StockId" />
+
+    <input type="hidden" asp-for="PId" />
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Product
+        </label>
+
+        <input class="form-control"
+               value="@Model.Product.ProductName"
+               readonly />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label asp-for="StockQuantity"></label>
+
+        <input asp-for="StockQuantity"
+               class="form-control" />
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Update Stock
+    </button>
+
+</form>

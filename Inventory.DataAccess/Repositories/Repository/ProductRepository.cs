@@ -24,6 +24,8 @@ namespace Inventory.Repositories
         {
             return _context.Products
                            .Include(p => p.Category)
+                           .Include(p => p.Supplier)
+                           .Include(p => p.Stock)
                            .FirstOrDefault(p => p.PId == id);
         }
 

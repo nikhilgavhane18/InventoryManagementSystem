@@ -42,7 +42,6 @@ namespace Inventory.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -157,12 +156,6 @@ namespace Inventory.DataAccess.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
@@ -177,23 +170,26 @@ namespace Inventory.DataAccess.Migrations
 
             modelBuilder.Entity("Inventory.Models.Stock", b =>
                 {
-                    b.Property<int>("SId")
+                    b.Property<int>("StockId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"));
 
                     b.Property<int>("PId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StockType")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SId");
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("PId")
+                        .IsUnique();
 
                     b.ToTable("Stocks");
                 });
@@ -379,6 +375,17 @@ namespace Inventory.DataAccess.Migrations
                     b.Navigation("Supplier");
                 });
 
+            modelBuilder.Entity("Inventory.Models.Stock", b =>
+                {
+                    b.HasOne("Inventory.Models.Product", "Product")
+                        .WithOne("Stock")
+                        .HasForeignKey("Inventory.Models.Stock", "PId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -433,6 +440,11 @@ namespace Inventory.DataAccess.Migrations
             modelBuilder.Entity("Inventory.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Inventory.Models.Product", b =>
+                {
+                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Inventory.Models.Supplier", b =>
